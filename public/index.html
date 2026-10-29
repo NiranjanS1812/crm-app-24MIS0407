@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM System - 24MIS0407 [v1]</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <div class="header-left">
+        <h1>CRM System</h1>
+        <p class="subtitle">Roll Number: <strong>24MIS0407</strong> | Project: Customer Relationship Management</p>
+      </div>
+      <div class="header-right">
+        <span class="version-badge v1">Version v1 (Add Customer)</span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="card">
+        <div class="card-header">
+          <h2>➕ Add New Customer</h2>
+          <span class="feature-tag">Feature: v1</span>
+        </div>
+        <form id="customerForm">
+          <div class="form-group">
+            <label for="name">Customer Name</label>
+            <input type="text" id="name" name="name" placeholder="e.g. Alice Smith" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g. +1-555-0199" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="e.g. alice@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="e.g. Acme Corporation" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Save Customer</button>
+        </form>
+        <div id="statusMessage" class="status-message"></div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>DevOps & Cloud Pipeline Project | Roll Number: 24MIS0407 | CRM App v1</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
