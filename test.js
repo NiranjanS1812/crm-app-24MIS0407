@@ -38,26 +38,34 @@ const server = app.listen(0, async () => {
     // 1. Smoke test: Health Check
     const health = await request('GET', '/health');
     console.log('Health check response:', health.body);
-    if (health.statusCode !== 200 || health.body.status !== 'UP' || health.body.version !== 'v1') {
+    if (health.statusCode !== 200 || health.body.status !== 'UP' || health.body.version !== 'v2') {
       throw new Error(`Health check failed: ${JSON.stringify(health)}`);
     }
     console.log('✔ Health check passed');
 
-    // 2. Smoke test: Add customer (v1)
+    // 2. Smoke test: Add customer (v1 feature)
     const newCustomer = {
-      name: 'Alice Smith',
-      phone: '+1-555-0100',
-      email: 'alice@example.com',
-      company: 'Innovatech'
+      name: 'Bob Johnson',
+      phone: '+1-555-0200',
+      email: 'bob@example.com',
+      company: 'Tech Solutions'
     };
     const addRes = await request('POST', '/customers', newCustomer);
     console.log('Add customer response:', addRes.body);
     if (addRes.statusCode !== 201 || !addRes.body.id || addRes.body.name !== newCustomer.name) {
       throw new Error(`Add customer failed: ${JSON.stringify(addRes)}`);
     }
-    console.log('✔ Add customer (v1) passed');
+    console.log('✔ Add customer passed');
 
-    console.log('All tests passed successfully for v1!');
+    // 3. Smoke test: View customers (v2 feature)
+    const listRes = await request('GET', '/customers');
+    console.log('View customers response:', listRes.body);
+    if (listRes.statusCode !== 200 || !Array.isArray(listRes.body) || listRes.body.length === 0) {
+      throw new Error(`View customers failed: ${JSON.stringify(listRes)}`);
+    }
+    console.log('✔ View customers (v2) passed');
+
+    console.log('All tests passed successfully for v2!');
     server.close(() => process.exit(0));
   } catch (err) {
     console.error('❌ Test failed:', err);

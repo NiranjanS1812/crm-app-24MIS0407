@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRM System - 24MIS0407 [v1]</title>
+  <title>CRM System - 24MIS0407 [v2]</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
         <p class="subtitle">Roll Number: <strong>24MIS0407</strong> | Project: Customer Relationship Management</p>
       </div>
       <div class="header-right">
-        <span class="version-badge v1">Version v1 (Add Customer)</span>
+        <span class="version-badge v2">Version v2 (Add & View Customers)</span>
       </div>
     </header>
 
@@ -45,10 +45,35 @@
         </form>
         <div id="statusMessage" class="status-message"></div>
       </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2>📋 Customer Directory</h2>
+          <span class="feature-tag">Feature: v2</span>
+        </div>
+        <div class="table-responsive">
+          <table id="customerTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Company</th>
+              </tr>
+            </thead>
+            <tbody id="customerTableBody">
+              <tr>
+                <td colspan="5" style="text-align: center; color: #6b7280;">Loading customers...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
 
     <footer class="app-footer">
-      <p>DevOps & Cloud Pipeline Project | Roll Number: 24MIS0407 | CRM App v1</p>
+      <p>DevOps & Cloud Pipeline Project | Roll Number: 24MIS0407 | CRM App v2</p>
     </footer>
   </div>
   <script src="app.js"></script>

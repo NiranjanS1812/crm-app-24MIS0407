@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const VERSION = 'v1';
+const VERSION = 'v2';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,6 +38,11 @@ app.post('/customers', (req, res) => {
   };
   customers.push(customer);
   res.status(201).json(customer);
+});
+
+// v2 Feature: View Customers (GET /customers)
+app.get('/customers', (req, res) => {
+  res.status(200).json(customers);
 });
 
 if (require.main === module) {
