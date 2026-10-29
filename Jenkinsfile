@@ -51,7 +51,7 @@ pipeline {
 
     post {
         always {
-            cleanWs()
+            echo "Build finished for branch ${env.BRANCH_NAME}"
         }
         success {
             echo "Pipeline succeeded for branch ${env.BRANCH_NAME} [Roll No: 24MIS0407]"
