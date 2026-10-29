@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const VERSION = 'v2';
+const VERSION = 'v3';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -43,6 +43,24 @@ app.post('/customers', (req, res) => {
 // v2 Feature: View Customers (GET /customers)
 app.get('/customers', (req, res) => {
   res.status(200).json(customers);
+});
+
+// v3 Feature: Update Customer (PUT /customers/:id)
+app.put('/customers/:id', (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const { name, phone, email, company } = req.body;
+
+  const customerIndex = customers.findIndex(c => c.id === id);
+  if (customerIndex === -1) {
+    return res.status(404).json({ error: `Customer with ID ${id} not found` });
+  }
+
+  if (name !== undefined) customers[customerIndex].name = name;
+  if (phone !== undefined) customers[customerIndex].phone = phone;
+  if (email !== undefined) customers[customerIndex].email = email;
+  if (company !== undefined) customers[customerIndex].company = company;
+
+  res.status(200).json(customers[customerIndex]);
 });
 
 if (require.main === module) {

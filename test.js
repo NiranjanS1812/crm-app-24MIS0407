@@ -38,17 +38,17 @@ const server = app.listen(0, async () => {
     // 1. Smoke test: Health Check
     const health = await request('GET', '/health');
     console.log('Health check response:', health.body);
-    if (health.statusCode !== 200 || health.body.status !== 'UP' || health.body.version !== 'v2') {
+    if (health.statusCode !== 200 || health.body.status !== 'UP' || health.body.version !== 'v3') {
       throw new Error(`Health check failed: ${JSON.stringify(health)}`);
     }
     console.log('✔ Health check passed');
 
     // 2. Smoke test: Add customer (v1 feature)
     const newCustomer = {
-      name: 'Bob Johnson',
-      phone: '+1-555-0200',
-      email: 'bob@example.com',
-      company: 'Tech Solutions'
+      name: 'Charlie Davis',
+      phone: '+1-555-0300',
+      email: 'charlie@example.com',
+      company: 'DataCorp'
     };
     const addRes = await request('POST', '/customers', newCustomer);
     console.log('Add customer response:', addRes.body);
@@ -63,9 +63,20 @@ const server = app.listen(0, async () => {
     if (listRes.statusCode !== 200 || !Array.isArray(listRes.body) || listRes.body.length === 0) {
       throw new Error(`View customers failed: ${JSON.stringify(listRes)}`);
     }
-    console.log('✔ View customers (v2) passed');
+    console.log('✔ View customers passed');
 
-    console.log('All tests passed successfully for v2!');
+    // 4. Smoke test: Update customer (v3 feature)
+    const updatedCustomer = {
+      company: 'DataCorp International'
+    };
+    const updateRes = await request('PUT', `/customers/${addRes.body.id}`, updatedCustomer);
+    console.log('Update customer response:', updateRes.body);
+    if (updateRes.statusCode !== 200 || updateRes.body.company !== 'DataCorp International') {
+      throw new Error(`Update customer failed: ${JSON.stringify(updateRes)}`);
+    }
+    console.log('✔ Update customer (v3) passed');
+
+    console.log('All tests passed successfully for v3!');
     server.close(() => process.exit(0));
   } catch (err) {
     console.error('❌ Test failed:', err);
