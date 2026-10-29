@@ -1,0 +1,60 @@
+jenkins:
+  systemMessage: "Automated CI/CD Server for 24MIS0407 CRM App"
+  numExecutors: 2
+  mode: NORMAL
+  scmCheckoutRetryCount: 3
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "AdminPassword24MIS0407!"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "dockerhub-creds"
+              username: "niranjans1822"
+              password: "${DOCKERHUB_TOKEN}"
+              description: "DockerHub credentials for CRM App"
+
+unclassified:
+  location:
+    url: "http://localhost:8085/"
+
+jobs:
+  - script: >
+      multibranchPipelineJob('crm-app-multibranch') {
+        branchSources {
+          branchSource {
+            source {
+              git {
+                id('crm-app-git')
+                remote('https://github.com/NiranjanS1812/crm-app-24MIS0407.git')
+                traits {
+                  gitBranchDiscovery()
+                  headRegexFilter {
+                    regex('(main|v1|v2|v3)')
+                  }
+                }
+              }
+            }
+          }
+        }
+        orphanedItemStrategy {
+          discardOldItems {
+            numToKeep(10)
+          }
+        }
+        factory {
+          workflowBranchProjectFactory {
+            scriptPath('Jenkinsfile')
+          }
+        }
+      }

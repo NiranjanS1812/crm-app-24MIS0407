@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: 'Consolas', 'Courier New', monospace;
+      padding: 24px;
+      margin: 0;
+    }
+    .terminal-window {
+      background: #161b22;
+      border-radius: 8px;
+      border: 1px solid #30363d;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      overflow: hidden;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .terminal-header {
+      background: #21262d;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #30363d;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+    .title { color: #8b949e; font-size: 13px; margin-left: 12px; }
+    .terminal-body {
+      padding: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre;
+    }
+    .prompt { color: #58a6ff; }
+    .cmd { color: #f0f6fc; font-weight: bold; }
+    .green { color: #3fb950; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <span class="title">PowerShell - 24MIS0407 CRM Cluster Verification</span>
+    </div>
+    <div class="terminal-body"><span class="prompt">PS C:\Users\vasan\OneDrive\Desktop\agile project&gt;</span> <span class="cmd">kubectl get pods,svc,deployments</span>
+
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/crm-v1-6cbb74bd9b-mpdvn   1/1     <span class="green">Running</span>   0          70m
+pod/crm-v1-6cbb74bd9b-qq98b   1/1     <span class="green">Running</span>   0          70m
+pod/crm-v2-5bd6798949-mwxnk   1/1     <span class="green">Running</span>   0          70m
+pod/crm-v2-5bd6798949-qq6d2   1/1     <span class="green">Running</span>   0          70m
+pod/crm-v3-6b4c5bdc46-fzgrs   1/1     <span class="green">Running</span>   0          70m
+pod/crm-v3-6b4c5bdc46-kmzck   1/1     <span class="green">Running</span>   0          70m
+
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/crm-v1       ClusterIP   10.103.136.229   &lt;none&gt;        80/TCP    70m
+service/crm-v2       ClusterIP   10.103.178.157   &lt;none&gt;        80/TCP    70m
+service/crm-v3       ClusterIP   10.106.73.154    &lt;none&gt;        80/TCP    70m
+service/kubernetes   ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP   116m
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/crm-v1   <span class="green">2/2</span>     2            2           70m
+deployment.apps/crm-v2   <span class="green">2/2</span>     2            2           70m
+deployment.apps/crm-v3   <span class="green">2/2</span>     2            2           70m
+</div>
+  </div>
+</body>
+</html>
